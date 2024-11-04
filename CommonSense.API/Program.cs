@@ -13,7 +13,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 // singleton only for testing
-builder.Services.AddSingleton<IRepository<User>, TestUserRepository<User>>();
+builder.Services.AddScoped<IRepository<User>, EfCoreUserRepository<User>>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddDbContext<CommonSenseContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("CommonSense.API")));
 var app = builder.Build();
