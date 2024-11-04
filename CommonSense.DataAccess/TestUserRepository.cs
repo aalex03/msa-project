@@ -1,9 +1,10 @@
 using System.Linq.Expressions;
-using CommonSense.DataAccess.Models;
+using CommonSense.Domain.Interfaces;
+using CommonSense.Domain.Models;
 
 namespace CommonSense.Services;
 
-public class TestUserRepository : IRepository<User>
+public class TestUserRepository<T> : IRepository<User>
 {
     private readonly List<User> _users = new List<User>
         {

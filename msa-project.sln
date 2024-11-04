@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommonSense.DataAccess", "C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommonSense.Services", "CommonSense.Services\CommonSense.Services.csproj", "{9F9E566D-E557-4951-8475-4ECCBDA6478D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommonSense.Domain", "CommonSense.Domain\CommonSense.Domain.csproj", "{5D69E483-5BCF-42E4-AA0E-0B5428B03689}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{9F9E566D-E557-4951-8475-4ECCBDA6478D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9F9E566D-E557-4951-8475-4ECCBDA6478D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9F9E566D-E557-4951-8475-4ECCBDA6478D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D69E483-5BCF-42E4-AA0E-0B5428B03689}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D69E483-5BCF-42E4-AA0E-0B5428B03689}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D69E483-5BCF-42E4-AA0E-0B5428B03689}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D69E483-5BCF-42E4-AA0E-0B5428B03689}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

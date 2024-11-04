@@ -1,4 +1,4 @@
-namespace CommonSense.DataAccess.Models;
+namespace CommonSense.Domain.Models;
 using System.ComponentModel.DataAnnotations;
 public class User
 {
@@ -10,5 +10,4 @@ public class User
     [MaxLength(128)]
     public string? Role { get; set; }
     public int Points { get; set; }
-
 }

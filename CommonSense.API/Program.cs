@@ -1,3 +1,7 @@
+using CommonSense.Domain.Interfaces;
+using CommonSense.Domain.Models;
+using CommonSense.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -6,7 +10,9 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
+// singleton only for testing
+builder.Services.AddSingleton<IRepository<User>, TestUserRepository<User>>();
+builder.Services.AddScoped<IUserService, UserService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

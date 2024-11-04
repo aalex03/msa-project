@@ -1,4 +1,4 @@
-namespace CommonSense.DataAccess.Models;
+namespace CommonSense.Domain.Models;
 using System.ComponentModel.DataAnnotations;
 
 public class Comment
