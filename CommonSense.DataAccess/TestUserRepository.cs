@@ -2,7 +2,7 @@ using System.Linq.Expressions;
 using CommonSense.Domain.Interfaces;
 using CommonSense.Domain.Models;
 
-namespace CommonSense.Services;
+namespace CommonSense.DataAccess;
 
 public class TestUserRepository<T> : IRepository<User>
 {

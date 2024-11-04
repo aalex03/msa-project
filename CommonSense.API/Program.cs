@@ -1,6 +1,8 @@
+using CommonSense.DataAccess;
 using CommonSense.Domain.Interfaces;
 using CommonSense.Domain.Models;
 using CommonSense.Services;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +15,7 @@ builder.Services.AddSwaggerGen();
 // singleton only for testing
 builder.Services.AddSingleton<IRepository<User>, TestUserRepository<User>>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddDbContext<CommonSenseContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("CommonSense.API")));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

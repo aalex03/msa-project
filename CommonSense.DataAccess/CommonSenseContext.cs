@@ -1,9 +1,9 @@
-namespace CommonSense.DataAccess;
 
-using CommonSense.DataAccess.Models;
+using CommonSense.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 
-class CommonSenseContext : DbContext
+namespace CommonSense.DataAccess;
+public class CommonSenseContext : DbContext
 {
     public DbSet<Report> Reports { get; set; }
     public DbSet<User> Users { get; set; }
