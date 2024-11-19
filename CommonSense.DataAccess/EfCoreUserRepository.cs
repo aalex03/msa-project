@@ -33,7 +33,7 @@ public class EfCoreUserRepository<T> : IRepository<User>
 
     public async Task<IEnumerable<User>> GetAllAsync()
     {
-        // consider changing the user model to use IEnumerable
+        // TODO: consider changing the user model to use IEnumerable
         return (await _context.Users.ToListAsync()).AsEnumerable();
     }
 
