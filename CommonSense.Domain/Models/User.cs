@@ -9,6 +9,7 @@ public class User
     public required string Email { get; set; }
     [MaxLength(128)]
     public string? Role { get; set; }
+    public byte[]? ProfilePicture { get; set; }
     public int Points { get; set; }
 
     public List<Report> Reports { get; set; } = new();

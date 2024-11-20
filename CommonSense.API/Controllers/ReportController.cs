@@ -19,11 +19,13 @@ public class ReportController : ControllerBase
     {
         _reportService = reportService;
     }
+    [AllowAnonymous]
     [HttpGet]
     public async Task<IEnumerable<Report>> GetReportsAsync()
     {
         return await _reportService.GetReportsAsync();
     }
+    [AllowAnonymous]
     [HttpGet("{id}")]
     public async Task<Report> GetReportAsync(int id)
     {

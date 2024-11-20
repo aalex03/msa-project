@@ -29,4 +29,22 @@ public class UserService : IUserService
     {
         return await _userRepository.DeleteAsync(id);
     }
+
+    public Task<User> SetupProfile(string username, byte[]? profilePicture, string email)
+    {
+        var user = new User
+        {
+            Name = username,
+            Email = email,
+            Role = "User",
+            ProfilePicture = profilePicture,
+        };
+        return _userRepository.AddAsync(user);
+    }
+
+    public async Task<User> GetUserByEmailAsync(string email)
+    {
+        var user = (await _userRepository.GetAsync(u => u.Email == email)).SingleOrDefault();
+        return user;
+    }
 }

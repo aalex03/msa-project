@@ -18,11 +18,13 @@ public class CommentController : ControllerBase
     {
         _commentService = commentService;
     }
+    [AllowAnonymous]
     [HttpGet]
     public async Task<IEnumerable<Comment>> GetCommentsForReportAsync([FromQuery] int reportId)
     {
         return await _commentService.GetCommentsByReportIdAsync(reportId);
     }
+    [AllowAnonymous]
     [HttpGet("{id}")]
     public async Task<Comment> GetCommentAsync(int id)
     {
