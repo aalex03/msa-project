@@ -1,5 +1,6 @@
 
 using System.Security.Claims;
+using CommonSense.Domain.DTOs;
 using CommonSense.Domain.Interfaces;
 using CommonSense.Domain.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -35,14 +36,15 @@ public class UserController : ControllerBase
         return await _userService.AddUserAsync(user);
     }
     [HttpPost("setup-profile")]
-    public async Task<ActionResult<User>> SetupProfile([FromBody] string username)
+    public async Task<ActionResult<User>> SetupProfile([FromBody] SetupProfileDTO profile)
     {
+        var (username, profilePicture) = (profile.Username, profile.ProfilePicture);
         var email = GetUserEmailFromClaims();
         if (email is null)
         {
             return BadRequest("Email not found in claims");
         }
-        var user = await _userService.SetupProfile(username, email);
+        var user = await _userService.SetupProfile(username, profilePicture, email);
         return Ok(user);
     }
     [HttpPut]

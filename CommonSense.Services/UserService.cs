@@ -30,13 +30,14 @@ public class UserService : IUserService
         return await _userRepository.DeleteAsync(id);
     }
 
-    public Task<User> SetupProfile(string username, string email)
+    public Task<User> SetupProfile(string username, byte[]? profilePicture, string email)
     {
         var user = new User
         {
             Name = username,
             Email = email,
-            Role = "User"
+            Role = "User",
+            ProfilePicture = profilePicture,
         };
         return _userRepository.AddAsync(user);
     }
