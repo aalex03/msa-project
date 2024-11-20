@@ -24,7 +24,6 @@ function App() {
 
   return (
     <div className="App">
-      <Router>
         <Navbar signIn={signIn} />
         <Routes>
           <Route
@@ -33,7 +32,6 @@ function App() {
             element={<Home isAuthenticated={isAuthenticated} />}
           />
         </Routes>
-      </Router>
     </div>
   );
 }
