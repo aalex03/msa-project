@@ -100,3 +100,11 @@
       display: none;
     }
   }
+
+  .MuiButton-contained {
+    background-color: #425f72 !important; 
+    color: black !important; 
+  }
+  .MuiButton-contained:hover {
+    background-color: #334a5c !important; 
+  }
