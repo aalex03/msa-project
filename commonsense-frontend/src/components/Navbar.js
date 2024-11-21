@@ -39,7 +39,7 @@ function Navbar(props) {
   to="/user"
   sx={{ backgroundColor: '#425f72', color: 'black' }} 
 >
-  User
+  LOGIN
 </Button>
 <button>
 <ReorderIcon />
