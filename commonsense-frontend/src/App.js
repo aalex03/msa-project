@@ -21,14 +21,18 @@ function App() {
       console.error("Login failed: ", error);
     }
   };
+  const signOut = () => {
+    instance.logoutPopup();
+    sessionStorage.removeItem("user");
+    navigate("/home");
+  }
 
   return (
     <div className="App">
-        <Navbar signIn={signIn} />
+        <Navbar signIn={signIn} signOut={signOut} isAuthenticated={isAuthenticated} />
         <Routes>
           <Route
-            exact
-            path="/"
+            path="/*"
             element={<Home isAuthenticated={isAuthenticated} />}
           />
         </Routes>

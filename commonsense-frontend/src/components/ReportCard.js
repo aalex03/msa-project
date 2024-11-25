@@ -1,3 +1,5 @@
+import React from 'react';
+import { Card } from 'react-bootstrap';
 const ReportCard = ({ report }) => {
     const { Title, Photos, CreatedAt, Status } = report;
 
@@ -33,3 +35,5 @@ const ReportCard = ({ report }) => {
         </Card>
     );
 };
+
+export default ReportCard;

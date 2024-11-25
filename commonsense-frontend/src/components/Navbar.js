@@ -5,10 +5,8 @@ import '../styles/Navbar.css'
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import ReorderIcon from '@mui/icons-material/Reorder';
-
-
 function Navbar(props) {
-  const {signIn} = props
+  const {signIn, signOut, isAuthenticated} = props
   return (
 
     <div className="navbar">
@@ -33,13 +31,13 @@ function Navbar(props) {
   About
 </Button>
 <Button
-  onClick={signIn}
+  onClick={isAuthenticated ? signOut : signIn}
   variant="contained"
   component={Link}
-  to="/user"
+  to= "/home"
   sx={{ backgroundColor: '#425f72', color: 'black' }} 
 >
-  LOGIN
+  {isAuthenticated ? "Logout" : "Login"}
 </Button>
 <button>
 <ReorderIcon />
