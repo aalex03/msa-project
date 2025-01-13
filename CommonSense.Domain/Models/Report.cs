@@ -15,4 +15,5 @@ public class Report
     public User? User { get; set; }
     public int UserId { get; set; }
     public List<Comment> Comments { get; set; } = new();
+    public List<Upvote> Upvotes { get; set; } = new();
 }

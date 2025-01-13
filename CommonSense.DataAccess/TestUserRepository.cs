@@ -8,9 +8,9 @@ public class TestUserRepository<T> : IRepository<User>
 {
     private readonly List<User> _users = new List<User>
         {
-            new User { Id = 1, Name = "John Doe", Email = "", Role = "Admin", Points = 100 },
-            new User { Id = 2, Name = "Jane Doe", Email = "", Role = "User", Points = 50 },
-            new User { Id = 3, Name = "Alice", Email = "", Role = "User", Points = 10 },
+            new User { Id = 1, Name = "John Doe", Email = "", Role = "Admin",},
+            new User { Id = 2, Name = "Jane Doe", Email = "", Role = "User",},
+            new User { Id = 3, Name = "Alice", Email = "", Role = "User"},
         };
 
     public Task<User> GetAsync(int id)
@@ -42,7 +42,6 @@ public class TestUserRepository<T> : IRepository<User>
             user.Name = entity.Name;
             user.Email = entity.Email;
             user.Role = entity.Role;
-            user.Points = entity.Points;
         }
         return Task.FromResult(user);
     }

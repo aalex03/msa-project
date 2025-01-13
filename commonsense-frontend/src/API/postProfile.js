@@ -1,7 +1,7 @@
 import { prepareToken } from "./authUtils";
 
-export async function postProfileSetup(instance, user) {
-    const url = `${process.env.REACT_APP_API_URL}api/User/setup-profile`;
+export async function postProfile(instance, user) {
+    const url = `${process.env.REACT_APP_API_URL}api/User/profile`;
     const token = await prepareToken(instance);
   
     const response = await fetch(url, {

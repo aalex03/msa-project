@@ -14,9 +14,11 @@ using System.Threading.Tasks;
 public class CommentController : ControllerBase
 {
     private readonly ICommentService _commentService;
-    public CommentController(ICommentService commentService)
+    private readonly IUserService _userService;
+    public CommentController(ICommentService commentService, IUserService userService)
     {
         _commentService = commentService;
+        _userService = userService;
     }
     [AllowAnonymous]
     [HttpGet]
@@ -31,8 +33,13 @@ public class CommentController : ControllerBase
         return await _commentService.GetCommentAsync(id);
     }
     [HttpPost]
-    public async Task<Comment> AddCommentAsync([FromBody] CommentDTO comment)
+    public async Task<ActionResult<Comment>> AddCommentAsync([FromBody] CommentDTO comment)
     {
+        var email = User.Claims.FirstOrDefault(c => c.Type == "email")?.Value;
+        if(email == null) return BadRequest("No email found");
+        var user = await _userService.GetUserByEmailAsync(email);
+        if(user == null) return BadRequest("No user found");
+        comment.UserId = user.Id;
         return await _commentService.AddCommentAsync(comment);
     }
     [HttpPut]

@@ -4,6 +4,7 @@ using CommonSense.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CommonSense.API.Migrations
 {
     [DbContext(typeof(CommonSenseContext))]
-    partial class CommonSenseContextModelSnapshot : ModelSnapshot
+    [Migration("20250112154827_update")]
+    partial class update
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -95,29 +98,6 @@ namespace CommonSense.API.Migrations
                     b.ToTable("Reports");
                 });
 
-            modelBuilder.Entity("CommonSense.Domain.Models.Upvote", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("ReportId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ReportId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Upvotes");
-                });
-
             modelBuilder.Entity("CommonSense.Domain.Models.User", b =>
                 {
                     b.Property<int>("Id")
@@ -134,6 +114,9 @@ namespace CommonSense.API.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Points")
+                        .HasColumnType("int");
 
                     b.Property<byte[]>("ProfilePicture")
                         .HasColumnType("varbinary(max)");
@@ -177,30 +160,9 @@ namespace CommonSense.API.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("CommonSense.Domain.Models.Upvote", b =>
-                {
-                    b.HasOne("CommonSense.Domain.Models.Report", "Report")
-                        .WithMany("Upvotes")
-                        .HasForeignKey("ReportId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("CommonSense.Domain.Models.User", "User")
-                        .WithMany("Upvotes")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Report");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("CommonSense.Domain.Models.Report", b =>
                 {
                     b.Navigation("Comments");
-
-                    b.Navigation("Upvotes");
                 });
 
             modelBuilder.Entity("CommonSense.Domain.Models.User", b =>
@@ -208,8 +170,6 @@ namespace CommonSense.API.Migrations
                     b.Navigation("Comments");
 
                     b.Navigation("Reports");
-
-                    b.Navigation("Upvotes");
                 });
 #pragma warning restore 612, 618
         }

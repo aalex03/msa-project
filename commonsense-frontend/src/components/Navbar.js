@@ -23,6 +23,18 @@ function Navbar(props) {
   Home
 </Button>
 <Button
+  variant='contained'
+  component={Link}
+  to="/leaderboard"
+  sx={{ backgroundColor: '#425f72', color: 'black' }}
+>Leaderboard</Button>
+<Button
+  variant='contained'
+  component={Link}
+  to="/profile"
+  sx={{ backgroundColor: '#425f72', color: 'black' }}
+>Profile</Button>
+<Button
   variant="contained"
   component={Link}
   to="/about"
@@ -39,6 +51,7 @@ function Navbar(props) {
 >
   {isAuthenticated ? "Logout" : "Login"}
 </Button>
+
 <button>
 <ReorderIcon />
 </button>

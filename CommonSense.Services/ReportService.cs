@@ -34,7 +34,6 @@ public class ReportService : IReportService
     {
         var newReport = new Report
         {
-            Id = Random.Shared.Next(),
             Title = report.Title,
             Description = report.Description,
             Status = report.Status,
@@ -65,4 +64,5 @@ public class ReportService : IReportService
         };
         return _reportRepository.UpdateAsync(updatedReport);
     }
+    
 }

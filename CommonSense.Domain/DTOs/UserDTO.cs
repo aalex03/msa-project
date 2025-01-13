@@ -6,5 +6,4 @@ public class UserDTO
     public required string Email { get; set; }
     public string? Role { get; set; }
     public byte[]? ProfilePicture { get; set; }
-    public int Points { get; set; }
 }

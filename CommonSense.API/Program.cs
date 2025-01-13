@@ -13,7 +13,11 @@ var builder = WebApplication.CreateBuilder(args);
 JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
+    });
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
@@ -50,6 +54,7 @@ builder.Services.AddScoped(typeof(IRepository<>), typeof(EfCoreRepository<>));
 builder.Services.AddScoped<ICommentService, CommentService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IReportService, ReportService>();
+builder.Services.AddScoped<IUpvoteService, UpvoteService>();
 builder.Services.AddDbContext<CommonSenseContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("CommonSense.API")));
 builder.Services
     .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -81,11 +86,11 @@ if (app.Environment.IsDevelopment())
         options.OAuthUseBasicAuthenticationWithAccessCodeGrant();
     });
 }
-
+app.UseCors();
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
-app.UseMiddleware<ProfileSetupMiddleware>();
+//app.UseMiddleware<ProfileSetupMiddleware>();
 app.MapControllers();
 
 app.Run();

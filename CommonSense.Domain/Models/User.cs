@@ -10,8 +10,8 @@ public class User
     [MaxLength(128)]
     public string? Role { get; set; }
     public byte[]? ProfilePicture { get; set; }
-    public int Points { get; set; }
 
     public List<Report> Reports { get; set; } = new();
     public List<Comment> Comments { get; set; } = new();
+    public List<Upvote> Upvotes { get; set; } = new();
 }

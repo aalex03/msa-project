@@ -1,7 +1,5 @@
-import { prepareToken } from "./authUtils";
-
-export async function getReports() {
-    const url = `${process.env.REACT_APP_API_URL}api/Report`;
+export async function getReportUpvotes(reportId) {
+    const url = `${process.env.REACT_APP_API_URL}api/Report/${reportId}/upvotes`;
     const response = await fetch(url, {
         method: "GET",
         headers: {

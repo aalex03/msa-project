@@ -8,6 +8,7 @@ import { PublicClientApplication } from "@azure/msal-browser";
 import { BrowserRouter } from 'react-router-dom';
 
 const msalInstance = new PublicClientApplication(msalConfig)
+await msalInstance.initialize();
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

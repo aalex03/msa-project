@@ -6,7 +6,6 @@ const Reports = ({ reports }) => {
     if (!reports || reports.length === 0) {
         return <p>No reports available.</p>;
     }
-
     return (
         <Container>
             <Row>

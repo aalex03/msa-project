@@ -23,7 +23,7 @@ public class CommentService : ICommentService
     }
     public async Task<IEnumerable<Comment>> GetCommentsByReportIdAsync(int reportId)
     {
-        return (await _commentRepository.GetAllAsync()).Where(c => c.Id == reportId);
+        return (await _commentRepository.GetAllAsync()).Where(c => c.ReportId == reportId);
     }
     public async Task<Comment> DeleteCommentAsync(int id)
     {
@@ -34,8 +34,8 @@ public class CommentService : ICommentService
     {
         var newComment = new Comment
         {
-            Id = Random.Shared.Next(),
             Text = comment.Text,
+            CreatedAt = DateTime.Now,
             ReportId = comment.ReportId,
             UserId = comment.UserId
         };

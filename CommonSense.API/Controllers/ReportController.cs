@@ -15,9 +15,13 @@ using System.Threading.Tasks;
 public class ReportController : ControllerBase
 {
     private readonly IReportService _reportService;
-    public ReportController(IReportService reportService)
+    private readonly IUserService _userService;
+    private readonly IUpvoteService _upvoteService;
+    public ReportController(IReportService reportService, IUserService userService, IUpvoteService upvoteService)
     {
         _reportService = reportService;
+        _userService = userService;
+        _upvoteService = upvoteService;
     }
     [AllowAnonymous]
     [HttpGet]
@@ -32,8 +36,13 @@ public class ReportController : ControllerBase
         return await _reportService.GetReportAsync(id);
     }
     [HttpPost]
-    public async Task<Report> AddReportAsync([FromBody] ReportDTO report)
+    public async Task<ActionResult<Report>> AddReportAsync([FromBody] ReportDTO report)
     {
+        var email = User.Claims.FirstOrDefault(c => c.Type == "email")?.Value;
+        if(email == null) return BadRequest("No email found");
+        var user = await _userService.GetUserByEmailAsync(email);
+        if(user == null) return BadRequest("No user found");
+        report.UserId = user.Id;
         return await _reportService.AddReportAsync(report);
     }
     [HttpPut]
@@ -41,6 +50,22 @@ public class ReportController : ControllerBase
     {
         return await _reportService.UpdateReportAsync(id, report);
     }
+    [AllowAnonymous]
+    [HttpGet("{reportId}/upvotes")]
+    public async Task<int> GetUpvotesForReportAsync(int reportId)
+    {
+        return await _upvoteService.GetUpvotesCountAsync(reportId);
+    }
+    [HttpPost("{reportId}/upvote")]
+    public async Task<ActionResult<Upvote>> UpvoteReportAsync(int reportId)
+    {
+        var email = User.Claims.FirstOrDefault(c => c.Type == "email")?.Value;
+        if(email == null) return BadRequest("No email found");
+        var user = await _userService.GetUserByEmailAsync(email);
+        if(user == null) return BadRequest("No user found");
+        return await _upvoteService.UpvoteReportAsync(reportId, user.Id);
+    }
+
     [HttpDelete("{id}")]
     public async Task<Report> DeleteReportAsync(int id)
     {
