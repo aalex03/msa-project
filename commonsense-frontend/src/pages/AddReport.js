@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { useMsal } from '@azure/msal-react';
 import { postReport } from '../API/postReport';
-
+import MapSelector from '../components/MapSelector';
 const AddReport = () => {
   const { instance } = useMsal();
   const [title, setTitle] = useState('');
@@ -46,7 +46,6 @@ const AddReport = () => {
       // Handle error (e.g., show an error message)
     }
   };
-
   return (
     <div className="add-report">
       <h1>Add Report</h1>
@@ -120,8 +119,12 @@ const AddReport = () => {
             onChange={(e) => setPhotos(e.target.files)}
           />
         </Form.Group>
+        <MapSelector setPosition={({ lat, lng }) => {
+        setLatitude(lat);
+        setLongitude(lng);
+      }} />
 
-        <Button variant="primary" type="submit">
+        <Button variant="primary" type="submit" style={{display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
           Submit
         </Button>
       </Form>

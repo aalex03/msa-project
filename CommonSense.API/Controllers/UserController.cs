@@ -1,5 +1,6 @@
 
 using System.Security.Claims;
+using CommonSense.DataAccess;
 using CommonSense.Domain.DTOs;
 using CommonSense.Domain.Interfaces;
 using CommonSense.Domain.Models;
@@ -13,9 +14,11 @@ namespace CommonSense.API.Controllers;
 public class UserController : ControllerBase
 {
     private readonly IUserService _userService;
-    public UserController(IUserService userService)
+    private readonly CommonSenseContext _context;
+    public UserController(IUserService userService, CommonSenseContext context)
     {
         _userService = userService;
+        _context = context;
     }
     [AllowAnonymous]
     [HttpGet]

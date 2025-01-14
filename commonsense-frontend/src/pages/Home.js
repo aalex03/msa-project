@@ -5,6 +5,7 @@ import getUsernameFromSession from "../utils";
 import Reports from "./Reports";
 import AddReportButton from "../components/AddReportButton";
 import { useIsAuthenticated, useMsal } from "@azure/msal-react";
+import Map from "../components/Map";
 
 function Home() {
   const [reports, setReports] = useState([]);
@@ -24,7 +25,7 @@ function Home() {
   }, [isAuthenticated]);
 
   return (
-    <div className="home">
+    <div className="home" style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
       <h1>Hello, {username ?? "Guest"}</h1>
       <Reports reports={reports} />
       {isAuthenticated && <AddReportButton />} {/* Show button if user is logged in */}

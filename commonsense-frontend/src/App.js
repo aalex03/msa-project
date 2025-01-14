@@ -9,7 +9,9 @@ import ReportDetail from './pages/ReportDetail';
 import Leaderboard from './pages/Leaderboard';
 import Profile from './pages/Profile';
 import { postProfileSetup } from './API/postProfileSetup';
+import { getProfile } from './API/getProfile';
 import getUsernameFromSession from './utils';
+import MapEvents from './pages/MapEvents';
 
 function App() {
   const { instance } = useMsal();
@@ -26,7 +28,9 @@ function App() {
         role: null,
         profilePicture: null
       }
-      postProfileSetup(instance, user);
+      await postProfileSetup(instance, user);
+      const profileInfo = await getProfile(instance);
+      sessionStorage.setItem("profileInfo", JSON.stringify(profileInfo));
       // Redirect to home after successful login
       navigate("/");
     } catch (error) {
@@ -51,6 +55,7 @@ function App() {
           <Route path="/report/:id" element={<ReportDetail />} />
           <Route path="/leaderboard" element={<Leaderboard />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/events" element={<MapEvents />} />
         </Routes>
     </div>
   );
