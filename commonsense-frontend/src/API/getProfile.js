@@ -10,5 +10,6 @@ export async function getProfile(instance) {
         }
     });
     const responseData = await response.json();
+    responseData.profilePicture = "";
     return responseData;
 }

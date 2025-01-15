@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../styles/Home.css";
 import { getReports } from "../API/getReports";
-import getUsernameFromSession from "../utils"; 
+import getUsernameFromSession, { getProfileName } from "../utils"; 
 import Reports from "./Reports";
 import AddReportButton from "../components/AddReportButton";
 import { useIsAuthenticated, useMsal } from "@azure/msal-react";
@@ -21,14 +21,14 @@ function Home() {
   }, [instance]);
 
   useEffect(() => {
-    setUsername(getUsernameFromSession());
+    setUsername(getProfileName());
   }, [isAuthenticated]);
 
   return (
     <div className="home" style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-      <h1>Hello, {username ?? "Guest"}</h1>
+      <h1>Hello, {isAuthenticated ? (username ?? "Guest") : "Guest"}</h1>
       <Reports reports={reports} />
-      {isAuthenticated && <AddReportButton />} {/* Show button if user is logged in */}
+      {isAuthenticated && <AddReportButton />}
     </div>
   )
 }

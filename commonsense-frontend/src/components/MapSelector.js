@@ -16,7 +16,7 @@ const MapSelector = ({ setPosition }) => {
   return (
     <MapContainer
       id='map'
-      center={[45.760696, 21.226788]} // Default center position
+      center={[45.760696, 21.226788]} // Default center position set to Timisoara
       zoom={13}
       style={{ width: '60%', minWidth: '600px', display: 'block', margin: '0 auto 2rem auto', height: '400px' }}
     >

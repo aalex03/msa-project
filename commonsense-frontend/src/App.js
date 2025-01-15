@@ -10,7 +10,6 @@ import Leaderboard from './pages/Leaderboard';
 import Profile from './pages/Profile';
 import { postProfileSetup } from './API/postProfileSetup';
 import { getProfile } from './API/getProfile';
-import getUsernameFromSession from './utils';
 import MapEvents from './pages/MapEvents';
 
 function App() {
@@ -23,11 +22,10 @@ function App() {
       const loginResponse = await instance.loginPopup(loginRequest);
       sessionStorage.setItem("user", JSON.stringify(loginResponse.account));
       const user = {
-        name: getUsernameFromSession(),
-        email: getUsernameFromSession(),
-        role: null,
-        profilePicture: null
+        Name: loginResponse.account.name,
+        Email: loginResponse.account.username,
       }
+      console.log(user);
       await postProfileSetup(instance, user);
       const profileInfo = await getProfile(instance);
       sessionStorage.setItem("profileInfo", JSON.stringify(profileInfo));

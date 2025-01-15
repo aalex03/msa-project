@@ -4,10 +4,10 @@ import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 
 const customIcon = L.icon({
-    iconUrl: 'https://cdn-icons-png.flaticon.com/512/684/684908.png', // URL to your custom icon image
-  iconSize: [38, 38],  // Size of the icon [width, height]
-  iconAnchor: [19, 38], // Anchor point of the icon (coordinates of the "tip" of the pin)
-  popupAnchor: [0, -38] // Position of the popup relative to the icon
+    iconUrl: 'https://cdn-icons-png.flaticon.com/512/684/684908.png', 
+  iconSize: [38, 38], 
+  iconAnchor: [19, 38], 
+  popupAnchor: [0, -38] 
   });
 
 const Map = ({position}) => {

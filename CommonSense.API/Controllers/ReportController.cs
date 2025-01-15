@@ -38,7 +38,7 @@ public class ReportController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<Report>> AddReportAsync([FromBody] ReportDTO report)
     {
-        var email = User.Claims.FirstOrDefault(c => c.Type == "email")?.Value;
+        var email = Helper.GetUserEmailFromClaims(User);
         if(email == null) return BadRequest("No email found");
         var user = await _userService.GetUserByEmailAsync(email);
         if(user == null) return BadRequest("No user found");
@@ -59,7 +59,7 @@ public class ReportController : ControllerBase
     [HttpPost("{reportId}/upvote")]
     public async Task<ActionResult<Upvote>> UpvoteReportAsync(int reportId)
     {
-        var email = User.Claims.FirstOrDefault(c => c.Type == "email")?.Value;
+        var email = Helper.GetUserEmailFromClaims(User);
         if(email == null) return BadRequest("No email found");
         var user = await _userService.GetUserByEmailAsync(email);
         if(user == null) return BadRequest("No user found");
@@ -67,8 +67,14 @@ public class ReportController : ControllerBase
     }
 
     [HttpDelete("{id}")]
-    public async Task<Report> DeleteReportAsync(int id)
+    public async Task<ActionResult<Report>> DeleteReportAsync(int id)
     {
+        var email = Helper.GetUserEmailFromClaims(User);
+        if(email == null) return BadRequest("No email found");
+        var user = await _userService.GetUserByEmailAsync(email);
+        if(user == null) return BadRequest("No user found");
+        var report = await _reportService.GetReportAsync(id);
+        if(report.UserId != user.Id || user.Role != "Admin") return Unauthorized();
         return await _reportService.DeleteReportAsync(id);
     }
 }

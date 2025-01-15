@@ -33,3 +33,17 @@ export const getUserId = () => {
     }
     return null;
   };
+
+  export const getProfileName = () => {
+    const userInfo = sessionStorage.getItem('profileInfo');
+    if (userInfo) {
+      try {
+        const parsedUserInfo = JSON.parse(userInfo);
+        return parsedUserInfo.name;
+      } catch (error) {
+        console.error('Error parsing userInfo from sessionStorage:', error);
+        return null;
+      }
+    }
+    return null;
+  };

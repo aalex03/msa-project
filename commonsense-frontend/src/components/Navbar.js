@@ -30,12 +30,14 @@ function Navbar(props) {
           sx={{ backgroundColor: '#425f72', color: 'black' }}
           >Map
         </Button>
+        {isAuthenticated &&(
         <Button
           variant='contained'
           component={Link}
           to="/profile"
           sx={{ backgroundColor: '#425f72', color: 'black' }}
         >Profile</Button>
+        )}
         <Button
           variant="contained"
           component={Link}

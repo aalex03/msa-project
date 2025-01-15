@@ -9,6 +9,7 @@ import { getUserRole } from '../utils';
 import { deleteComment } from '../API/deleteComment';
 const CommentList = ({ comments, setComments, reportId}) => {
   const [newComment, setNewComment] = useState('');
+  const [users, setUsers] = useState([]);
   const {instance} = useMsal();
   const isAuthenticated = useIsAuthenticated();
   const userId = getUserId();
@@ -22,6 +23,7 @@ const CommentList = ({ comments, setComments, reportId}) => {
       setComments(data);
     };
     fetchComments();
+
   }, [reportId, setComments]);
     
   const handleCommentSubmit = async (e) => {
@@ -57,7 +59,7 @@ const CommentList = ({ comments, setComments, reportId}) => {
         {comments.map((comment, index) => (
           <ListGroup.Item key={index}>
             <p>{comment.text}</p>
-            <small>By User {comment.userId} on {new Date(comment.createdAt).toLocaleDateString()}</small>
+            <small>By {comment.user.name} on {new Date(comment.createdAt).toLocaleDateString()}</small>
             {isAuthenticated && (comment.userId === userId || userRole === 'Admin') && (
             <button onClick={() => handleDeleteComment(comment.id)} style={{ float: 'right' }}>
               Delete

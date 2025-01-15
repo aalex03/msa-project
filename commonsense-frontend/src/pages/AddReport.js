@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { useMsal } from '@azure/msal-react';
+import { useNavigate } from 'react-router-dom';
 import { postReport } from '../API/postReport';
 import MapSelector from '../components/MapSelector';
 const AddReport = () => {
@@ -12,7 +13,7 @@ const AddReport = () => {
   const [latitude, setLatitude] = useState('');
   const [longitude, setLongitude] = useState('');
   const [photos, setPhotos] = useState([]);
-
+  const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -34,16 +35,17 @@ const AddReport = () => {
       latitude: parseFloat(latitude),
       longitude: parseFloat(longitude),
       photos: photosBase64,
-      createdAt: new Date(), // Set createdAt to the current date and time
+      createdAt: new Date(),
     };
 
     try {
       const response = await postReport(instance, reportDTO);
       console.log('Report submitted successfully:', response);
-      // Handle successful submission (e.g., navigate to another page or show a success message)
+      navigate('/');
+
     } catch (error) {
       console.error('Error submitting report:', error);
-      // Handle error (e.g., show an error message)
+      alert('Failed to submit report');
     }
   };
   return (

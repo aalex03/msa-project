@@ -6,7 +6,7 @@ const AddReportButton = () => {
   const navigate = useNavigate();
 
   const handleAddReport = () => {
-    navigate('/add-report'); // Navigate to the add report page
+    navigate('/add-report');
   };
 
   return (

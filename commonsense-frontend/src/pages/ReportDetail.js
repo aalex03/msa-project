@@ -52,7 +52,7 @@ const ReportDetail = () => {
   const handleDeleteReport = async () => {
     try {
       await deleteReport(instance, id);
-      navigate("/") // Redirect to home page after deletion
+      navigate("/") 
     } catch (error) {
       console.error('Error deleting report:', error);
     }
@@ -71,7 +71,7 @@ const ReportDetail = () => {
           <p>Latitude: {report.latitude}</p>
           <p>Longitude: {report.longitude}</p>
           <p>Created At: {new Date(report.createdAt).toLocaleDateString()}</p>
-          <p>Upvotes: {upvotes}</p> {/* Display the upvote count */}
+          <p>Upvotes: {upvotes}</p>
           {isAuthenticated && (
             <Button variant="primary" onClick={handleUpvote}>
               Upvote

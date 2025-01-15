@@ -35,7 +35,7 @@ public class UserController : ControllerBase
     [HttpGet("profile")]
     public async Task<ActionResult<User>> GetCurrentUserAsync()
     {
-        var email = GetUserEmailFromClaims();
+        var email = Helper.GetUserEmailFromClaims(User);
         if (email is null)
         {
             return BadRequest("Email not found in claims");
@@ -45,7 +45,7 @@ public class UserController : ControllerBase
     [HttpPost("profile")]
     public async Task<ActionResult<User>> SetupProfile([FromBody] SetupProfileDTO profile)
     {
-        var email = GetUserEmailFromClaims();
+        var email = Helper.GetUserEmailFromClaims(User);
         if (email is null)
         {
             return BadRequest("Email not found in claims");
@@ -70,7 +70,9 @@ public class UserController : ControllerBase
     [HttpPost("setup-profile")]
     public async Task<ActionResult<User>> SetupProfile([FromBody] UserDTO profile)
     {
-        var email = User.Claims.FirstOrDefault(c => c.Type == "email")?.Value;
+        //var email = User.Claims.FirstOrDefault(c => c.Type == "email")?.Value;
+        //var email = User.FindFirst(ClaimTypes.Email)?.Value;
+        var email = Helper.GetUserEmailFromClaims(User);
         if (email is null)
         {
             return BadRequest("Email not found in claims");
@@ -104,12 +106,6 @@ public class UserController : ControllerBase
     public async Task<User> DeleteUserAsync(int id)
     {
         return await _userService.DeleteUserAsync(id);
-    }
-
-    private string? GetUserEmailFromClaims()
-    {
-        var email = User.Claims.FirstOrDefault(c => c.Type == "email")?.Value;
-        return email;
     }
 
     public class SetupProfileDTO

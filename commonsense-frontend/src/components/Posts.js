@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import "./Posts.css"; // Add styles here or in App.css
+import "./Posts.css"; 
 
 function Posts() {
-  const [posts, setPosts] = useState([]); // Store the list of posts
-  const [newPost, setNewPost] = useState(""); // New post content
+  const [posts, setPosts] = useState([]); 
+  const [newPost, setNewPost] = useState("");
 
   const handlePost = () => {
     if (newPost.trim()) {
@@ -13,8 +13,8 @@ function Posts() {
         likes: 0,
         comments: [],
       };
-      setPosts([post, ...posts]); // Add new post to the top of the list
-      setNewPost(""); // Clear input field
+      setPosts([post, ...posts]); 
+      setNewPost("");
     }
   };
 
